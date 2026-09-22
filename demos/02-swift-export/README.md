@@ -1,4 +1,4 @@
-# Demo 02: Swift Export Alpha
+# Demo 02: Swift Export
 
 **Goal**: Show generated, idiomatic Swift APIs from Kotlin — no manual wrappers.
 
@@ -12,7 +12,7 @@
 
 ## Setup (done before demo)
 
-- IntelliJ: open `repos/swift-export-sample/`, let Gradle sync
+- IntelliJ: open `repos/02-swift-export/`, let Gradle sync
 - Xcode: open `iosApp/iosApp.xcodeproj`, **run the app once** to trigger code generation
 
 ---
