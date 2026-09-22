@@ -17,7 +17,7 @@ case "${1:-}" in
 esac
 
 if [ ! -d "$REPO_DIR/.git" ]; then
-    echo "Run the reset.sh copied into repos/04-agentic-workflow by install.sh." >&2
+    echo "Run the reset.sh copied into repos/03-agentic-workflow by install.sh." >&2
     exit 1
 fi
 

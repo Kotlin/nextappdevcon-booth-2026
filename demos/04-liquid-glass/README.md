@@ -1,4 +1,4 @@
-# Demo 01: Liquid Glass
+# Demo 04: Liquid Glass
 
 **Goal**: Show CMP's iOS flexibility — native SwiftUI shell wrapping shared Compose content.
 

@@ -44,7 +44,7 @@ fi
 if command -v kotlin >/dev/null 2>&1 && kotlin --help 2>&1 | grep 'init' >/dev/null; then
     ok "Kotlin Toolchain CLI found"
 else
-    warn "Kotlin Toolchain CLI not detected (a different kotlin command may be installed). Demo 03 uses its wrapper; Demo 05 needs https://kotl.in/install"
+    warn "Kotlin Toolchain CLI not detected (a different kotlin command may be installed). Demo 02 uses its wrapper; Demo 01 needs https://kotl.in/install"
 fi
 
 echo ""
@@ -83,48 +83,48 @@ checkout_branch() {
 echo "Cloning demo repositories..."
 echo ""
 
-if ! "$TOOLCHAIN_ONLY"; then
-    # Demo 01 — Liquid Glass (lg-nav branch of kotlinconf-app)
-    clone_or_skip "01-liquid-glass" \
-        "https://github.com/JetBrains/kotlinconf-app.git" \
-        "--branch lg-nav --single-branch"
-    checkout_branch "01-liquid-glass" "lg-nav"
-    cp "$SCRIPT_DIR/demos/01-liquid-glass/README.md" "$REPOS_DIR/01-liquid-glass/BOOTH_DEMO.md"
-
-    # Demo 02 — Swift Export
-    clone_or_skip "02-swift-export" \
-        "https://github.com/Kotlin/swift-export-sample.git" \
-        "--branch artem.olkov/2.4.0_dev_demo --single-branch"
-    cp "$SCRIPT_DIR/demos/02-swift-export/README.md" "$REPOS_DIR/02-swift-export/BOOTH_DEMO.md"
-
-fi
-
-# Demo 03 — Kotlin Toolchain CLI (kotlin-toolchain branch of kotlinconf-app)
-clone_or_skip "03-kotlin-toolchain-cli" \
-    "https://github.com/JetBrains/kotlinconf-app.git" \
-    "--branch kotlin-toolchain --single-branch"
-cp "$SCRIPT_DIR/demos/03-kotlin-toolchain-cli/README.md" "$REPOS_DIR/03-kotlin-toolchain-cli/BOOTH_DEMO.md"
-
-# Demo 04 — Agentic Workflow (kotlin-toolchain-nadc-chr includes MCP configs).
-clone_or_skip "04-agentic-workflow" \
-    "https://github.com/JetBrains/kotlinconf-app.git" \
-    "--branch kotlin-toolchain-nadc-chr --single-branch"
-cp "$SCRIPT_DIR/demos/04-agentic-workflow/README.md" "$REPOS_DIR/04-agentic-workflow/BOOTH_DEMO.md"
-
-# Demo 05 — Project Creation; local starter repo; generate each new project under projects/.
-NEW_PROJECT_DIR="$REPOS_DIR/05-project-creation"
+# Demo 01 — Project Creation; local starter repo; generate each new project under projects/.
+NEW_PROJECT_DIR="$REPOS_DIR/01-project-creation"
 mkdir -p "$NEW_PROJECT_DIR/projects"
 if [ ! -d "$NEW_PROJECT_DIR/.git" ]; then
     git init --quiet "$NEW_PROJECT_DIR"
 fi
-cp "$SCRIPT_DIR/demos/05-project-creation/README.md" "$NEW_PROJECT_DIR/BOOTH_DEMO.md"
+cp "$SCRIPT_DIR/demos/01-project-creation/README.md" "$NEW_PROJECT_DIR/BOOTH_DEMO.md"
 if ! grep -qxF '/projects/' "$NEW_PROJECT_DIR/.git/info/exclude"; then
     echo '/projects/' >> "$NEW_PROJECT_DIR/.git/info/exclude"
 fi
 ok "New-project playground ready"
 
+# Demo 02 — CLI Experience (kotlin-toolchain branch of kotlinconf-app)
+clone_or_skip "02-cli-experience" \
+    "https://github.com/JetBrains/kotlinconf-app.git" \
+    "--branch kotlin-toolchain --single-branch"
+cp "$SCRIPT_DIR/demos/02-cli-experience/README.md" "$REPOS_DIR/02-cli-experience/BOOTH_DEMO.md"
+
+# Demo 03 — Agentic Workflow (kotlin-toolchain-nadc-chr includes MCP configs).
+clone_or_skip "03-agentic-workflow" \
+    "https://github.com/JetBrains/kotlinconf-app.git" \
+    "--branch kotlin-toolchain-nadc-chr --single-branch"
+cp "$SCRIPT_DIR/demos/03-agentic-workflow/README.md" "$REPOS_DIR/03-agentic-workflow/BOOTH_DEMO.md"
+
+if ! "$TOOLCHAIN_ONLY"; then
+    # Demo 04 — Liquid Glass (lg-nav branch of kotlinconf-app)
+    clone_or_skip "04-liquid-glass" \
+        "https://github.com/JetBrains/kotlinconf-app.git" \
+        "--branch lg-nav --single-branch"
+    checkout_branch "04-liquid-glass" "lg-nav"
+    cp "$SCRIPT_DIR/demos/04-liquid-glass/README.md" "$REPOS_DIR/04-liquid-glass/BOOTH_DEMO.md"
+
+    # Demo 05 — Swift Export
+    clone_or_skip "05-swift-export" \
+        "https://github.com/Kotlin/swift-export-sample.git" \
+        "--branch artem.olkov/2.4.0_dev_demo --single-branch"
+    cp "$SCRIPT_DIR/demos/05-swift-export/README.md" "$REPOS_DIR/05-swift-export/BOOTH_DEMO.md"
+
+fi
+
 # Keep copied presenter material out of source diffs. Existing sample edits stay intact.
-for sample in 03-kotlin-toolchain-cli 04-agentic-workflow; do
+for sample in 02-cli-experience 03-agentic-workflow; do
     for pattern in /BOOTH_DEMO.md /booth/; do
         if ! grep -qxF "$pattern" "$REPOS_DIR/$sample/.git/info/exclude"; then
             echo "$pattern" >> "$REPOS_DIR/$sample/.git/info/exclude"
@@ -161,15 +161,15 @@ if ! "$TOOLCHAIN_ONLY"; then
 fi
 echo "  - Open Kotlin Toolchain in IntelliJ IDEA with the Kotlin Toolchain plugin"
 echo "  - Open the agent workspace; its .mcp.json already configures Hot Reload and klibs MCP"
-echo "  - Between agent demos, run ./reset.sh from repos/04-agentic-workflow"
+echo "  - Between agent demos, run ./reset.sh from repos/03-agentic-workflow"
 echo "  - Use the new-project workspace for installation and kotlin init"
 echo "  Each workspace has a BOOTH_DEMO.md with walkthrough and reset instructions"
 echo ""
 echo "Demo quick reference:"
+echo "  Demo 01 (Project Creation): repos/01-project-creation/BOOTH_DEMO.md"
+echo "  Demo 02 (CLI Experience):   repos/02-cli-experience/BOOTH_DEMO.md"
+echo "  Demo 03 (Agentic Workflow): repos/03-agentic-workflow/BOOTH_DEMO.md"
 if ! "$TOOLCHAIN_ONLY"; then
-    echo "  Demo 01 (Liquid Glass):   repos/01-liquid-glass/BOOTH_DEMO.md"
-    echo "  Demo 02 (Swift Export):     repos/02-swift-export/BOOTH_DEMO.md"
+    echo "  Demo 04 (Liquid Glass):     repos/04-liquid-glass/BOOTH_DEMO.md"
+    echo "  Demo 05 (Swift Export):     repos/05-swift-export/BOOTH_DEMO.md"
 fi
-echo "  Demo 03 (Kotlin Toolchain CLI): repos/03-kotlin-toolchain-cli/BOOTH_DEMO.md"
-echo "  Demo 04 (Agentic Workflow):  repos/04-agentic-workflow/BOOTH_DEMO.md"
-echo "  Demo 05 (Project Creation):     repos/05-project-creation/BOOTH_DEMO.md"

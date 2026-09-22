@@ -1,7 +1,7 @@
-# Demo 05: Project Creation
+# Demo 01: Project Creation
 
 **Goal**: Go from the installation page to a running new Kotlin project.
-**Time**: 5 minutes. **Workspace**: `repos/05-project-creation/`.
+**Time**: 5 minutes. **Workspace**: `repos/01-project-creation/`.
 This is a separate local Git repository with an empty `projects/` playground, not a KotlinConf clone.
 
 ## Before visitors arrive

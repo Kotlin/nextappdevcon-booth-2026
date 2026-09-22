@@ -1,7 +1,7 @@
-# Demo 03: Kotlin Toolchain CLI
+# Demo 02: CLI Experience
 
 **Goal**: Run a real multiplatform app and explain the commands as you go.
-**Time**: 5 minutes. **Workspace**: `repos/03-kotlin-toolchain-cli/`.
+**Time**: 5 minutes. **Workspace**: `repos/02-cli-experience/`.
 **Branch**: `kotlin-toolchain`.
 
 ## Before visitors arrive

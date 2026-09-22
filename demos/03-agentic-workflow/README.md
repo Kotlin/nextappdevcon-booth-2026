@@ -1,4 +1,4 @@
-# Demo 04: Agentic Workflow
+# Demo 03: Agentic Workflow
 
 **Goal**: Show an agent investigating and fixing a UI bug in a running Compose app.
 
