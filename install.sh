@@ -110,11 +110,11 @@ clone_or_skip "03-agentic-workflow" \
 cp "$SCRIPT_DIR/demos/03-agentic-workflow/README.md" "$REPOS_DIR/03-agentic-workflow/BOOTH_DEMO.md"
 
 if ! "$TOOLCHAIN_ONLY"; then
-    # Demo 04 — Liquid Glass (lg-nav branch of kotlinconf-app)
+    # Demo 04 — Liquid Glass (kotlin-toolchain-nadc-lg branch of kotlinconf-app)
     clone_or_skip "04-liquid-glass" \
         "https://github.com/JetBrains/kotlinconf-app.git" \
-        "--branch lg-nav --single-branch"
-    checkout_branch "04-liquid-glass" "lg-nav"
+        "--branch kotlin-toolchain-nadc-lg --single-branch"
+    checkout_branch "04-liquid-glass" "kotlin-toolchain-nadc-lg"
     cp "$SCRIPT_DIR/demos/04-liquid-glass/README.md" "$REPOS_DIR/04-liquid-glass/BOOTH_DEMO.md"
 
     # Demo 05 — Swift Export

@@ -2,18 +2,14 @@
 
 **Goal**: Show CMP's iOS flexibility — native SwiftUI shell wrapping shared Compose content.
 
-**Time**: ~5 min | **Reset**: No | **Branch**: `lg-nav`
-
-**Related KotlinConf 2026 talks**:
-- [What's New in Compose Multiplatform: Better Shared UI for iOS and Beyond (May 21, 13:00–13:45)](https://kotlinconf.com/schedule/?day=2026-05-21&session=92678c1e-b1f8-59d7-b035-0e8793896aff)
-- [Bringing Native iOS Feel to Compose Multiplatform Apps (May 21, 11:45–12:00)](https://kotlinconf.com/schedule/?day=2026-05-21&session=053ee75f-d815-5461-9f12-765f9a678757)
+**Time**: ~5 min | **Reset**: No | **Branch**: `kotlin-toolchain-nadc-lg`
 
 ---
 
 ## Setup
 
-- IntelliJ IDEA: open this repo, let Gradle sync
-- Xcode: open [`KotlinConf.xcodeproj`](app/iosApp/KotlinConf.xcodeproj), select `KotlinConfAppScheme`, run on iOS 26+ simulator
+- Run `./kotlin run -m iosApp -p iosSimulatorArm64`
+- From Xcode: open [`module.xcworkspace`](app/iosApp/module.xcworkspace), select the `app` scheme, and run on an iOS 26+ simulator
 
 ---
 
@@ -25,16 +21,16 @@
 - Tap a session → native push transition + back gesture
 - _"This is a KMP app. Let me show you how it's wired up."_
 
-**2. Swift entry point** — [`ContentView.swift`](app/iosApp/iosApp/ContentView.swift)
+**2. Swift entry point** — [`ContentView.swift`](app/iosApp/src/ContentView.swift)
 - Branches on iOS 26+: `NativeNavContentView` vs full-screen `ComposeView` fallback
 - `NativeNavContentView` is a SwiftUI `TabView` — the tab bar is drawn by SwiftUI, not Compose
 - Navigation callbacks (`onNavigate`, `onGoBack`, ...) pass routing decisions up to Swift
 
-**3. Kotlin entry point** — [`kotlinconf/main.ios.kt`](app/shared/src/iosMain/kotlin/org/jetbrains/kotlinconf/main.ios.kt)
+**3. Kotlin entry point** — [`kotlinconf/main.ios.kt`](app/shared/src@ios/org/jetbrains/kotlinconf/main.ios.kt)
 - `MainViewController(topLevelRoute:onNavigate:onGoBack:...)` — Compose calls these lambdas instead of doing its own navigation
 - _"This is all the Kotlin side needs — a `ComposeUIViewController` wrapping a `@Composable`"_
 
-**4. Key highlights** — back in [`ContentView.swift`](app/iosApp/iosApp/ContentView.swift)
+**4. Key highlights** — back in [`ContentView.swift`](app/iosApp/src/ContentView.swift)
 - `.tabBarMinimizeBehavior(.automatic)` — liquid glass collapse on scroll, free
 - _"None of the animation or chrome code lives in Kotlin. Compose just renders content."_
 
