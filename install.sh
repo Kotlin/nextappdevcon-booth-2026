@@ -79,18 +79,15 @@ checkout_branch() {
 echo "Cloning demo repositories..."
 echo ""
 
-# Demo 01 — Project Creation; local starter repo; generate each new project under projects/.
+# Demo 01 — Project Creation; host workspace for the macOS VM demo.
 NEW_PROJECT_DIR="$REPOS_DIR/01-project-creation"
-mkdir -p "$NEW_PROJECT_DIR/projects"
+mkdir -p "$NEW_PROJECT_DIR"
 if [ ! -d "$NEW_PROJECT_DIR/.git" ]; then
     git init --quiet "$NEW_PROJECT_DIR"
 fi
 cp "$SCRIPT_DIR/demos/01-project-creation/README.md" "$NEW_PROJECT_DIR/BOOTH_DEMO.md"
-cp "$SCRIPT_DIR/demos/01-project-creation/macos-demo.sh" "$NEW_PROJECT_DIR/macos-demo.sh"
-chmod +x "$NEW_PROJECT_DIR/macos-demo.sh"
-if ! grep -qxF '/projects/' "$NEW_PROJECT_DIR/.git/info/exclude"; then
-    echo '/projects/' >> "$NEW_PROJECT_DIR/.git/info/exclude"
-fi
+cp "$SCRIPT_DIR/demos/01-project-creation/demo.sh" "$NEW_PROJECT_DIR/demo.sh"
+chmod +x "$NEW_PROJECT_DIR/demo.sh"
 ok "New-project playground and macOS VM launcher ready (Xcode image preparation is a separate step)"
 
 # Demo 02 — Kotlin Toolchain Walkthrough (kotlin-toolchain-nadc branch of kotlinconf-app)
@@ -114,12 +111,11 @@ cp "$SCRIPT_DIR/demos/04-liquid-glass/README.md" "$REPOS_DIR/04-liquid-glass/BOO
 
 # Demo 05 — Swift Export
 clone_or_skip "05-swift-export" \
-    "https://github.com/Kotlin/swift-export-sample.git" \
-    "--branch artem.olkov/2.4.0_dev_demo --single-branch"
+    "https://github.com/Kotlin/swift-export-sample.git"
 cp "$SCRIPT_DIR/demos/05-swift-export/README.md" "$REPOS_DIR/05-swift-export/BOOTH_DEMO.md"
 
 # Keep copied presenter material out of source diffs. Existing sample edits stay intact.
-for sample in 02-kotlin-toolchain-walkthrough 03-agentic-workflow; do
+for sample in 02-kotlin-toolchain-walkthrough 03-agentic-workflow 04-liquid-glass; do
     for pattern in /BOOTH_DEMO.md /booth/; do
         if ! grep -qxF "$pattern" "$REPOS_DIR/$sample/.git/info/exclude"; then
             echo "$pattern" >> "$REPOS_DIR/$sample/.git/info/exclude"
@@ -156,9 +152,9 @@ echo "  - Open Kotlin Toolchain in IntelliJ IDEA with the Kotlin Toolchain plugi
 echo "  - Open the agent workspace; its .mcp.json already configures Hot Reload and klibs MCP"
 echo "  - Between agent demos, run ./reset.sh from repos/03-agentic-workflow"
 echo "  - Use the new-project workspace for installation and kotlin init"
-echo "  - Prepare a macOS base with Xcode once: (cd repos/01-project-creation && ./macos-demo.sh prepare)"
-echo "  - Open its macOS desktop: (cd repos/01-project-creation && ./macos-demo.sh run)"
-echo "  - Between installation demos, shut down the guest and run ./macos-demo.sh reset"
+echo "  - Prepare a macOS base with Xcode once: (cd repos/01-project-creation && ./demo.sh prepare)"
+echo "  - Open its macOS desktop: (cd repos/01-project-creation && ./demo.sh run)"
+echo "  - Between installation demos, shut down the guest and run ./demo.sh reset"
 echo "  Each workspace has a BOOTH_DEMO.md with walkthrough and reset instructions"
 echo ""
 echo "Demo quick reference:"

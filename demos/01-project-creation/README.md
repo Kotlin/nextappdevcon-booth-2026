@@ -12,13 +12,13 @@ Install tart and prepare the macOS image.
 brew tap openai/tools #use openai/tools for tart as cirruslabs has auth issues
 brew trust openai/tools
 brew install openai/tools/tart
-./macos-demo.sh prepare #this downloads a massive 62GB macOS image
+./demo.sh prepare #this downloads a massive 62GB macOS image
 
 ```
 
 ## Demo the installation (~1 min)
 
-1. Run the VM from your host terminal: `./macos-demo.sh run`
+1. Run the VM from your host terminal: `./demo.sh run`
 2. Wait for the VM to boot, the terminal opens automatically
 3. Open Safari and go to kotl.in/install
 4. Copy the curl command and run in the terminal (`curl -fsSL https://kotl.in/install.sh | sh`)
@@ -42,6 +42,6 @@ iOS requires xcode to be installed, Kotlin Toolchain provides the right instruct
 Shut down the demo by clicking the close button on the VM window. Then on the host:
 
 ```bash
-./macos-demo.sh reset
-./macos-demo.sh run
+./demo.sh reset
+./demo.sh run
 ```

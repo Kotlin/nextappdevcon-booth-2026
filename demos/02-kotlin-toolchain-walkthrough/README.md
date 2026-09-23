@@ -32,7 +32,7 @@
 
 ## Demo the IDE
 1. Showcase the run configurations
-2. Showcase the autocomplete in yaml files
+2. Showcase the autocomplete in [`app/shared/module.yaml`](app/shared/module.yaml), add a new android setting
 
 ---
 

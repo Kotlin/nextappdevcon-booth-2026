@@ -9,7 +9,7 @@ import tempfile
 import unittest
 
 
-LAUNCHER = Path(__file__).resolve().parents[1] / "demos/01-project-creation/macos-demo.sh"
+LAUNCHER = Path(__file__).resolve().parents[1] / "demos/01-project-creation/demo.sh"
 BASE = "nextapp-project-creation-xcode-base"
 DEMO = "nextapp-project-creation-xcode-demo"
 IMAGE = "ghcr.io/cirruslabs/macos-tahoe-xcode:latest"

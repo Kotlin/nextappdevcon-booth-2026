@@ -12,7 +12,7 @@ The guide folders under `demos/` and the working repos under `repos/` use the sa
 | 02 | [Kotlin Toolchain Walkthrough](demos/02-kotlin-toolchain-walkthrough/README.md) | `repos/02-kotlin-toolchain-walkthrough/` | ~5 min | `kotlin-toolchain-nadc` |
 | 03 | [Agentic Workflow](demos/03-agentic-workflow/README.md) | `repos/03-agentic-workflow/` | ~3 min | `kotlin-toolchain-nadc-chr` |
 | 04 | [Liquid Glass](demos/04-liquid-glass/README.md) | `repos/04-liquid-glass/` | ~5 min | `kotlin-toolchain-nadc-lg` |
-| 05 | [Swift Export](demos/05-swift-export/README.md) | `repos/05-swift-export/` | ~8 min | `artem.olkov/2.4.0_dev_demo` |
+| 05 | [Swift Export](demos/05-swift-export/README.md) | `repos/05-swift-export/` | ~8 min | Default branch |
 
 ## Setup
 

@@ -4,20 +4,16 @@
 
 **Time**: ~8 min | **Reset**: No
 
-**Related KotlinConf 2026 talks**:
-- [Swift Export: Where We Stand (May 21, 16:15–16:30)](https://kotlinconf.com/schedule/?day=2026-05-21&session=8ad5085d-1b01-5df1-aee2-edf629b20a50)
-- [Can Kotlin Swift Interop Ever Be Perfect? (May 21, 16:45–17:00)](https://kotlinconf.com/schedule/?day=2026-05-21&session=20ecd656-1a63-567a-bb12-534756857433)
-
 ---
 
-## Setup (done before demo)
+## Setup
 
-- IntelliJ: open `repos/05-swift-export/`, let Gradle sync
+- IntelliJ: open `repos/05-swift-export/`, let Gradle sync (note this is not a Kotlin Toolchain project)
 - Xcode: open `iosApp/iosApp.xcodeproj`, **run the app once** to trigger code generation
 
 ---
 
-## Steps
+## Demo
 
 1. **Run the app** — each line on screen calls Kotlin code
 
