@@ -9,41 +9,38 @@
 Install tart and prepare the macOS image.
 
 ```bash
-brew tap openai/tools #use openai/tools as cirruslabs has auth issues
+brew tap openai/tools #use openai/tools for tart as cirruslabs has auth issues
 brew trust openai/tools
 brew install openai/tools/tart
 ./macos-demo.sh prepare #this downloads a 24GB macOS image
-./macos-demo.sh run #starts the VM to demo in
+
 ```
 
-## Installation and project creation
+## Installation (1-2 min)
 
-Open Terminal inside the macOS VM and visit [kotl.in/install](https://kotl.in/install):
+1. Run the VM from your host terminal: `./macos-demo.sh run`
+2. Wait for the VM to boot, the terminal opens automatically
+3. Open Safari and go to kotl.in/install
+4. Copy the curl command and run in the terminal (`curl -fsSL https://kotl.in/install.sh | sh`)
+5. Export the path (`export PATH="$HOME/.local/bin:$PATH"`)
 
-```bash
-curl -fsSL https://kotl.in/install.sh | sh
-export PATH="$HOME/.local/bin:$PATH"
-
-kotlin -v
-kotlin --help
-
-mkdir -p ~/demo
-cd ~/demo
-
-kotlin init
-kotlin run --compose-hot-reload
-```
+## Project creation and first run (2-3 min)
+1. Create a new directory and enter it `mkdir demo && cd demo`
+2. Run `kotlin init`, select the multiplatform app
+3. Fastest to run is the Wasm app with `kotlin run -m wasm-app`
+4. Explain how on first run Kotlin Toolchain provisions your environment
+5. Potentially show hot reload as well `kotlin run --compose-hot-reload-mode`
 
 ## iOS provisioning
 
-- Run the iOS app to show the guided provisioning
-```bash
-kotlin run -m iosApp
-```
+iOS does still require xcode to be installed, but Kotlin Toolchain guides you through the process.
+
+- Run the iOS app `kotlin run -m ios-app`
+- Kotlin Toolchain will give an error that xcode needs to be installed
 
 ## Reset
 
-Shut down the demo using **Apple menu → Shut Down inside the guest**. Then on the host:
+Shut down the demo by clicking the close button on the VM window. Then on the host:
 
 ```bash
 ./macos-demo.sh reset
