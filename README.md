@@ -16,7 +16,7 @@ The guide folders under `demos/` and the working repos under `repos/` use the sa
 
 ## Setup
 
-From the booth kit root, prepare all five demos:
+From the booth kit root run in stall and open each repo and to follow the setup steps:
 
 ```bash
 ./install.sh
@@ -27,5 +27,6 @@ From the booth kit root, prepare all five demos:
 - **Git and JDK 17+** for setup and the sample projects.
 - **IntelliJ IDEA** with the **Kotlin Toolchain plugin**: [installation instructions](https://kotl.in/install).
 - **Kotlin Toolchain CLI** for Project Creation. The KotlinConf samples include a `./kotlin` wrapper.
+- **Tart on an Apple Silicon Mac** for the disposable Project Creation VM (optional; prepare its base before the demo).
 - **An MCP-capable coding agent** for Agentic Workflow. Its branch already includes `.mcp.json` with Compose Hot Reload and klibs.io configuration; enable that project configuration in your agent.
 - **Kotlin Multiplatform plugin and Xcode with CLI tools** for Liquid Glass and Swift Export. Liquid Glass requires an **iOS 26+ simulator**. See each guide for its IDE and Xcode setup.
