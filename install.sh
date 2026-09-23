@@ -4,12 +4,10 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPOS_DIR="$SCRIPT_DIR/repos"
 
-TOOLCHAIN_ONLY=false
-case "${1:-}" in
-    "") ;;
-    --toolchain-only) TOOLCHAIN_ONLY=true ;;
-    *) echo "Usage: $0 [--toolchain-only]" >&2; exit 2 ;;
-esac
+if [ "$#" -ne 0 ]; then
+    echo "Usage: $0" >&2
+    exit 2
+fi
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -32,9 +30,7 @@ echo "Checking prerequisites..."
 command -v git  >/dev/null 2>&1 && ok "git found"        || fail "git is required. Install via Xcode CLI tools: xcode-select --install"
 command -v java >/dev/null 2>&1 && ok "java found"       || fail "JDK 17+ is required. Download from https://adoptium.net"
 
-if "$TOOLCHAIN_ONLY"; then
-    ok "Toolchain-only setup: Xcode check skipped"
-elif command -v xcodebuild >/dev/null 2>&1; then
+if command -v xcodebuild >/dev/null 2>&1; then
     ok "Xcode CLI tools found"
 else
     fail "Xcode CLI tools required: xcode-select --install"
@@ -97,11 +93,11 @@ if ! grep -qxF '/projects/' "$NEW_PROJECT_DIR/.git/info/exclude"; then
 fi
 ok "New-project playground and macOS VM launcher ready (Xcode image preparation is a separate step)"
 
-# Demo 02 — CLI Experience (kotlin-toolchain branch of kotlinconf-app)
-clone_or_skip "02-cli-experience" \
+# Demo 02 — Kotlin Toolchain Walkthrough (kotlin-toolchain-nadc branch of kotlinconf-app)
+clone_or_skip "02-kotlin-toolchain-walkthrough" \
     "https://github.com/JetBrains/kotlinconf-app.git" \
-    "--branch kotlin-toolchain --single-branch"
-cp "$SCRIPT_DIR/demos/02-cli-experience/README.md" "$REPOS_DIR/02-cli-experience/BOOTH_DEMO.md"
+    "--branch kotlin-toolchain-nadc --single-branch"
+cp "$SCRIPT_DIR/demos/02-kotlin-toolchain-walkthrough/README.md" "$REPOS_DIR/02-kotlin-toolchain-walkthrough/BOOTH_DEMO.md"
 
 # Demo 03 — Agentic Workflow (kotlin-toolchain-nadc-chr includes MCP configs).
 clone_or_skip "03-agentic-workflow" \
@@ -109,24 +105,21 @@ clone_or_skip "03-agentic-workflow" \
     "--branch kotlin-toolchain-nadc-chr --single-branch"
 cp "$SCRIPT_DIR/demos/03-agentic-workflow/README.md" "$REPOS_DIR/03-agentic-workflow/BOOTH_DEMO.md"
 
-if ! "$TOOLCHAIN_ONLY"; then
-    # Demo 04 — Liquid Glass (kotlin-toolchain-nadc-lg branch of kotlinconf-app)
-    clone_or_skip "04-liquid-glass" \
-        "https://github.com/JetBrains/kotlinconf-app.git" \
-        "--branch kotlin-toolchain-nadc-lg --single-branch"
-    checkout_branch "04-liquid-glass" "kotlin-toolchain-nadc-lg"
-    cp "$SCRIPT_DIR/demos/04-liquid-glass/README.md" "$REPOS_DIR/04-liquid-glass/BOOTH_DEMO.md"
+# Demo 04 — Liquid Glass (kotlin-toolchain-nadc-lg branch of kotlinconf-app)
+clone_or_skip "04-liquid-glass" \
+    "https://github.com/JetBrains/kotlinconf-app.git" \
+    "--branch kotlin-toolchain-nadc-lg --single-branch"
+checkout_branch "04-liquid-glass" "kotlin-toolchain-nadc-lg"
+cp "$SCRIPT_DIR/demos/04-liquid-glass/README.md" "$REPOS_DIR/04-liquid-glass/BOOTH_DEMO.md"
 
-    # Demo 05 — Swift Export
-    clone_or_skip "05-swift-export" \
-        "https://github.com/Kotlin/swift-export-sample.git" \
-        "--branch artem.olkov/2.4.0_dev_demo --single-branch"
-    cp "$SCRIPT_DIR/demos/05-swift-export/README.md" "$REPOS_DIR/05-swift-export/BOOTH_DEMO.md"
-
-fi
+# Demo 05 — Swift Export
+clone_or_skip "05-swift-export" \
+    "https://github.com/Kotlin/swift-export-sample.git" \
+    "--branch artem.olkov/2.4.0_dev_demo --single-branch"
+cp "$SCRIPT_DIR/demos/05-swift-export/README.md" "$REPOS_DIR/05-swift-export/BOOTH_DEMO.md"
 
 # Keep copied presenter material out of source diffs. Existing sample edits stay intact.
-for sample in 02-cli-experience 03-agentic-workflow; do
+for sample in 02-kotlin-toolchain-walkthrough 03-agentic-workflow; do
     for pattern in /BOOTH_DEMO.md /booth/; do
         if ! grep -qxF "$pattern" "$REPOS_DIR/$sample/.git/info/exclude"; then
             echo "$pattern" >> "$REPOS_DIR/$sample/.git/info/exclude"
@@ -157,10 +150,8 @@ echo ""
 echo "Repos cloned to: $REPOS_DIR"
 echo ""
 echo "Next steps:"
-if ! "$TOOLCHAIN_ONLY"; then
-    echo "  - Open Liquid Glass and Swift Export in IntelliJ IDEA and let Gradle sync"
-    echo "  - Open the iOS projects in Xcode as described in each demo guide"
-fi
+echo "  - Open Liquid Glass and Swift Export in IntelliJ IDEA and let Gradle sync"
+echo "  - Open the iOS projects in Xcode as described in each demo guide"
 echo "  - Open Kotlin Toolchain in IntelliJ IDEA with the Kotlin Toolchain plugin"
 echo "  - Open the agent workspace; its .mcp.json already configures Hot Reload and klibs MCP"
 echo "  - Between agent demos, run ./reset.sh from repos/03-agentic-workflow"
@@ -172,9 +163,7 @@ echo "  Each workspace has a BOOTH_DEMO.md with walkthrough and reset instructio
 echo ""
 echo "Demo quick reference:"
 echo "  Demo 01 (Project Creation): repos/01-project-creation/BOOTH_DEMO.md"
-echo "  Demo 02 (CLI Experience):   repos/02-cli-experience/BOOTH_DEMO.md"
+echo "  Demo 02 (Kotlin Toolchain Walkthrough):   repos/02-kotlin-toolchain-walkthrough/BOOTH_DEMO.md"
 echo "  Demo 03 (Agentic Workflow): repos/03-agentic-workflow/BOOTH_DEMO.md"
-if ! "$TOOLCHAIN_ONLY"; then
-    echo "  Demo 04 (Liquid Glass):     repos/04-liquid-glass/BOOTH_DEMO.md"
-    echo "  Demo 05 (Swift Export):     repos/05-swift-export/BOOTH_DEMO.md"
-fi
+echo "  Demo 04 (Liquid Glass):     repos/04-liquid-glass/BOOTH_DEMO.md"
+echo "  Demo 05 (Swift Export):     repos/05-swift-export/BOOTH_DEMO.md"
