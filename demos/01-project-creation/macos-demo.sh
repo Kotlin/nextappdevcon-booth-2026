@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Fixed, separate names keep reset scoped to this demo and preserve its base.
-BASE_VM="nextapp-project-creation-base"
-DEMO_VM="nextapp-project-creation-demo"
-MACOS_IMAGE="${MACOS_IMAGE:-ghcr.io/cirruslabs/macos-tahoe-vanilla:latest}"
+# Separate names avoid reusing an existing vanilla VM when switching to Xcode.
+# Reset remains scoped to the disposable demo and preserves its base.
+BASE_VM="nextapp-project-creation-xcode-base"
+DEMO_VM="nextapp-project-creation-xcode-demo"
+MACOS_IMAGE="${MACOS_IMAGE:-ghcr.io/cirruslabs/macos-tahoe-xcode:latest}"
 
 usage() {
     echo "Usage: $0 [prepare|run|reset|--help]"
-    echo "  prepare  Download a vanilla macOS base once; preserve an existing base."
+    echo "  prepare  Download a macOS base with Xcode once; preserve an existing base."
     echo "  run      Open the demo in a macOS window, cloning the base if needed (default)."
     echo "  reset    Wipe the stopped demo VM and clone the stopped local base again."
     echo "Base: $BASE_VM   Disposable VM: $DEMO_VM"

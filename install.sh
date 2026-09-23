@@ -95,7 +95,7 @@ chmod +x "$NEW_PROJECT_DIR/macos-demo.sh"
 if ! grep -qxF '/projects/' "$NEW_PROJECT_DIR/.git/info/exclude"; then
     echo '/projects/' >> "$NEW_PROJECT_DIR/.git/info/exclude"
 fi
-ok "New-project playground and macOS VM launcher ready (Tart preparation is a separate step)"
+ok "New-project playground and macOS VM launcher ready (Xcode image preparation is a separate step)"
 
 # Demo 02 — CLI Experience (kotlin-toolchain branch of kotlinconf-app)
 clone_or_skip "02-cli-experience" \
@@ -165,7 +165,7 @@ echo "  - Open Kotlin Toolchain in IntelliJ IDEA with the Kotlin Toolchain plugi
 echo "  - Open the agent workspace; its .mcp.json already configures Hot Reload and klibs MCP"
 echo "  - Between agent demos, run ./reset.sh from repos/03-agentic-workflow"
 echo "  - Use the new-project workspace for installation and kotlin init"
-echo "  - Prepare a macOS base once: (cd repos/01-project-creation && ./macos-demo.sh prepare)"
+echo "  - Prepare a macOS base with Xcode once: (cd repos/01-project-creation && ./macos-demo.sh prepare)"
 echo "  - Open its macOS desktop: (cd repos/01-project-creation && ./macos-demo.sh run)"
 echo "  - Between installation demos, shut down the guest and run ./macos-demo.sh reset"
 echo "  Each workspace has a BOOTH_DEMO.md with walkthrough and reset instructions"

@@ -10,9 +10,9 @@ import unittest
 
 
 LAUNCHER = Path(__file__).resolve().parents[1] / "demos/01-project-creation/macos-demo.sh"
-BASE = "nextapp-project-creation-base"
-DEMO = "nextapp-project-creation-demo"
-IMAGE = "ghcr.io/cirruslabs/macos-tahoe-vanilla:latest"
+BASE = "nextapp-project-creation-xcode-base"
+DEMO = "nextapp-project-creation-xcode-demo"
+IMAGE = "ghcr.io/cirruslabs/macos-tahoe-xcode:latest"
 
 FAKE_COMMAND = r'''
 import json
@@ -118,6 +118,26 @@ class MacOSDemoTests(unittest.TestCase):
         self.assertEqual(self.mutations(), [
             ["clone", BASE, DEMO], ["run", DEMO], ["run", DEMO],
         ])
+
+    def test_switch_to_xcode_preserves_old_vanilla_vms(self):
+        old_vms = {
+            "nextapp-project-creation-base": "stopped",
+            "nextapp-project-creation-demo": "stopped",
+        }
+        self.seed(old_vms)
+        self.run_launcher("prepare")
+        self.run_launcher("run")
+        self.run_launcher("reset")
+        mutations = self.mutations()
+        self.assertEqual(mutations[0], ["clone", IMAGE, BASE])
+        self.assertIn(["clone", BASE, DEMO], mutations)
+        self.assertIn(["run", DEMO], mutations)
+        self.assertEqual([args for args in mutations if args[0] == "delete"],
+                         [["delete", DEMO]])
+        current = json.loads(self.state.read_text())["vms"]
+        self.assertEqual({name: current[name] for name in old_vms}, old_vms)
+        for args in mutations:
+            self.assertTrue(set(args).isdisjoint(old_vms))
 
     def test_reset_only_replaces_disposable_vm(self):
         self.seed({BASE: "stopped", DEMO: "stopped", "unrelated": "running"})
