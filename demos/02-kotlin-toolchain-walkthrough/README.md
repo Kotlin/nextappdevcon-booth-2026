@@ -9,10 +9,12 @@
 - Ensure IntelliJ, KMP IDE plugin and Kotlin Toolchain plugin are installed
 - Open the project in IntelliJ IDEA.
 
+---
+
 ## Demo the project structure and yaml
 
 **1. Top-level project** — [`project.yaml`](project.yaml)
-- 10 lines: a flat list of modules — no plugins block, no version catalogs, no classpath config
+- 10 lines: a flat list of modules
 
 **2. Desktop module** — [`app/desktopApp/module.yaml`](app/desktopApp/module.yaml)
 - `product: jvm/app` — one line declares what this module produces
@@ -20,10 +22,8 @@
 - `dependencies:` — just `../shared` and three Compose libs
 
 **3. Shared multiplatform module** — [`app/shared/module.yaml`](app/shared/module.yaml)
-- `product: lib` with all platforms listed — Android, iOS, JVM, JS, WASM
+- `product: kmp/lib` with all platforms listed — Android, iOS, JVM, JS, WASM
 - Dependencies declared once; the toolchain generates the per-platform source sets
-- _"No `sourceSets { commonMain { dependencies { ... } } }` boilerplate — just a flat dependency list."_
-
 
 ## Demo the CLI
 1. Showcase the interactive run command `kotlin run`

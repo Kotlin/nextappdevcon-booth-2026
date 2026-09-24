@@ -8,8 +8,8 @@
 
 ## Setup
 
-- Run `./kotlin run -m iosApp -p iosSimulatorArm64`
-- From Xcode: open [`module.xcworkspace`](app/iosApp/module.xcworkspace), select the `app` scheme, and run on an iOS 26+ simulator
+- Open the project with IntelliJ and let it index
+- Run the iOS app once with `kotlin run`
 
 ---
 
@@ -36,7 +36,7 @@
 
 ---
 
-## Key Q&As
+## Q&A
 
 **"Why not just use Compose for everything?"**
 You can! But native navigation gives you platform behaviors (system gestures, sheet detents) that are hard to replicate. Pick the right tool per layer.
@@ -47,6 +47,6 @@ Yes — see [KMPLiquidGlass](https://github.com/Kashif-E/KMPLiquidGlass). More c
 **"Are there libraries for adaptive/native-feeling Compose UIs?"**
 [Calf](https://klibs.io/project/MohamedRejeb/Calf) — adaptive components (sheets, pickers, file pickers) that wrap native platform UI from Compose.
 
----
+## References
 
-**Related documentation**: [kotl.in/liquid-glass](https://kotl.in/liquid-glass)
+[kotl.in/liquid-glass](https://kotl.in/liquid-glass)

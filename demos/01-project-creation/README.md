@@ -4,6 +4,8 @@
 **Time**: ~5 minutes after VM preparation
 **Workspace**: `repos/01-project-creation/` on the host.
 
+---
+
 ## Setup
 
 Install tart and prepare the macOS image.
@@ -13,8 +15,8 @@ brew tap openai/tools #use openai/tools for tart as cirruslabs has auth issues
 brew trust openai/tools
 brew install openai/tools/tart
 ./demo.sh prepare #this downloads a massive 62GB macOS image
-
 ```
+---
 
 ## Demo the installation (~1 min)
 
@@ -27,15 +29,17 @@ brew install openai/tools/tart
 ## Demo the project creation and first run (~2-3 min)
 1. Create a new directory and enter it `mkdir demo && cd demo`
 2. Run `kotlin init`, select the multiplatform app
-3. Fastest to run is the Wasm app with `kotlin run -m wasm-app` (~25s)
+3. Fastest to run is the Wasm app with `kotlin run` (~25s)
 4. Explain how on first run Kotlin Toolchain provisions your environment
-5. Potentially show hot reload as well `kotlin run --compose-hot-reload-mode` (~ 60s)
+5. Potentially show hot reload as well `kotlin run --compose-hot-reload` (~ 60s)
 
 ## Demo the iOS provisioning (~4 min)
 iOS requires xcode to be installed, Kotlin Toolchain provides the right instructions at the right time. This VM already has Xcode installed, so we do skip the installing and license acceptance.
-1. Run the iOS app `kotlin run -m ios-app` (~4 min)
+1. Run the iOS app `kotlin run` (~4 min)
 2. With the first run, all dependencies and simulators are downloaded and installed
-3. Subsequent runs are much faster `kotlin run -m ios-app` (~10 s)
+3. Subsequent iOS runs are much faster `kotlin run` (~10 s)
+
+---
 
 ## Reset
 
