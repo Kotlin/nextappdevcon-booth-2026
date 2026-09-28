@@ -1,4 +1,4 @@
-# NextAppDevConf 2026 Booth Demos
+# NextAppDevCon 2026 Booth Demos
 
 Demo kit for the NextAppDevConf 2026 booth.
 
